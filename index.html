@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-image: linear-gradient(to right, #ffdc6a, #f55a2a);
+      }
+      .turtle {
+        --x: 0;
+        --y: 0;
+        --rotateY: 0;
+        --rotate: 0;
+        transform: translate(var(--x), var(--y)) rotateY(var(--rotateY))
+          rotate(var(--rotate));
+      }
+    </style>
+  </head>
+  <body>
+    <img width="200px" class="turtle" src="./images/turtle.png" alt="turtle" />
+  </body>
+  <script>
+    const turtleEl = document.querySelector(".turtle");
+    let x = 0;
+    let y = 0;
+    const speed = 50;
+    // let rotateY = 0;
+    let rotate = 0;
+    let flipped = false;
+    document.addEventListener("keydown", function (event) {
+      switch (event.code) {
+        case "ArrowRight":
+          x = x + 1;
+          //   rotateY = 0;
+          flipped = false;
+          rotate = 0;
+          break;
+        case "ArrowLeft":
+          x = x - 1;
+          //   rotateY = 180;
+          flipped = true;
+          rotate = 0;
+          break;
+        case "ArrowUp":
+          y = y - 1;
+          rotate = -90;
+          break;
+        case "ArrowDown":
+          y = y + 1;
+          rotate = 90;
+          break;
+      }
+      turtleEl.setAttribute(
+        "style",
+        `--x:${x * speed}px; --y:${y * speed}px; --rotateY: ${
+          flipped ? "180" : "0"
+        }deg; --rotate: ${rotate}deg;`
+        // `--x:${x}px; --y:${y}px; --rotateY: ${rotateY}deg; --rotate: ${rotate}deg;`
+      );
+    });
+  </script>
+</html>
